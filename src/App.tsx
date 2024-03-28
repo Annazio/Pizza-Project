@@ -13,13 +13,24 @@ const addPizza = (newPizza: Pizza) => {
   setPizzasList([...pizzasList, newPizza])
 }
 
+const updatePizza = (newPizza: Pizza) => {
+  setPizzasList(pizzasList.map((pizza) =>
+  (pizza.id===newPizza.id ? newPizza : pizza)))
+}
+
+const deletePizza =(id: number) => {
+  const newPizzasList = pizzasList.filter(pizza => pizza.id !== id)
+  setPizzasList(newPizzasList)
+}
   return (
     <div className="App">
       <div className="wrap">
          <span className='heading'>Pizza house</span>
          <AddPizzaForm addPizza={addPizza}/>
          <DisplayPizzas
-         pizzasList={pizzasList}/>
+         pizzasList={pizzasList}
+         updatePizza={updatePizza}
+         deletePizza={deletePizza}/>
       </div>
     </div>
   );
